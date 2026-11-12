@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Anáhuac - Tareas</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        .tarea { background: #007bff; color: white; margin: 10px auto; padding: 15px; width: 300px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Mi Producto SaaS en la Nube</h1>
+    <div id="lista-tareas">Cargando datos desde Supabase...</div>
+
+    <script>
+        fetch('/api/tareas')
+            .then(res => res.json())
+            .then(data => {
+                const contenedor = document.getElementById('lista-tareas');
+                contenedor.innerHTML = '';
+                data.forEach(t => {
+                    contenedor.innerHTML += `<div class="tarea">ID: ${t.id} | ${t.titulo}</div>`;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
